@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_sort_list_m.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwingrov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/09 11:03:08 by mwingrov          #+#    #+#             */
-/*   Updated: 2017/08/31 11:19:27 by mwingrov         ###   ########.fr       */
+/*   Created: 2017/08/16 07:11:01 by mwingrov          #+#    #+#             */
+/*   Updated: 2017/09/04 15:41:28 by mwingrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+t_list	*ft_sort_list(t_list *lst, int (*cmp)(int, int))
 {
-	size_t	t_dst;
-	size_t	t_src;
+	t_list	*cur1;
+	t_list	*cur2;
 
-	t_dst = ft_strlen(dst);
-	t_src = ft_strlen((char *)src);
-	if (!(size > t_dst))
-		return (size + t_src);
-	ft_strncat(dst, src, size - t_dst - 1);
-	return (t_dst + t_src);
+	cur1 = lst;
+	while (cur1)
+	{
+		cur2 = cur1->next;
+		while (cur2)
+		{
+			if (cmp(cur1->data, cur2->data) != 1)
+				ft_swap(&cur1->data, &cur2->data);
+			cur2 = cur2->next;
+		}
+		cur1 = cur1->next;
+	}
+	return (lst);
 }

@@ -6,33 +6,39 @@
 /*   By: mwingrov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/09 03:19:26 by mwingrov          #+#    #+#             */
-/*   Updated: 2017/06/10 21:03:10 by mwingrov         ###   ########.fr       */
+/*   Updated: 2017/08/25 17:39:27 by mwingrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+static void		min_int(int sign, int fd)
 {
-	unsigned int	nb;
+	if (sign)
+		ft_putstr_fd("-2147483648", fd);
+	else
+		ft_putstr_fd("2147483647", fd);
+}
 
+void			ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+		return (min_int(1, fd));
+	else if (n == 214783647)
+		return (min_int(0, fd));
 	if (n < 0)
 	{
-		nb = -n;
-		ft_putchar_fd('-', fd);
+		write(fd, "-", 1);
+		n = -n;
 	}
-	else
-		nb = n;
-	if (nb >= 10)
+	if (n > 9)
 	{
-		ft_putnbr_fd(nb / 10, fd);
-		ft_putchar_fd((nb % 10) + '0', fd);
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
 	}
 	else
 	{
-		if (n > 0)
-			ft_putchar_fd(nb + '0', fd);
-		else
-			ft_putchar_fd(-nb + '0', fd);
+		n = n + 48;
+		write(fd, &n, 1);
 	}
 }

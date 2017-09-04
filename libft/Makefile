@@ -6,7 +6,7 @@
 #    By: mwingrov <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/17 17:54:18 by mwingrov          #+#    #+#              #
-#    Updated: 2017/08/22 11:35:12 by mwingrov         ###   ########.fr        #
+#    Updated: 2017/09/04 15:54:38 by mwingrov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,10 @@ SRC3 =	ft_strcmp.c ft_strncmp.c ft_memalloc.c ft_memdel.c \
 		ft_strnequ.c ft_strtrim.c ft_putendl.c ft_putchar_fd.c
 SRC4 = 	ft_putnbr_fd.c ft_putnbr.c ft_putstr_fd.c ft_putendl_fd.c \
 		ft_strjoin.c ft_strsub.c ft_strsplit.c ft_itoa.c \
+		ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
+		ft_lstadd.c ft_lstiter.c ft_lstmap.c \
+		ft_list_remove_if.c ft_swap.c ft_list_foreach.c \
+		ft_sort_list.c ft_itoa_base.c ft_sort_int_tab.c\
 
 SRC = $(SRC1) $(SRC2) $(SRC3) $(SRC4)
 
@@ -50,9 +54,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-norme:
-	norminette $(SRC1)
-	norminette $(SRC2)
-	norminette $(SRC3)
-	norminette $(SRC4)

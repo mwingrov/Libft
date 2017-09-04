@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwingrov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/09 11:03:08 by mwingrov          #+#    #+#             */
-/*   Updated: 2017/08/31 11:19:27 by mwingrov         ###   ########.fr       */
+/*   Created: 2017/08/25 13:13:53 by mwingrov          #+#    #+#             */
+/*   Updated: 2017/08/25 18:24:08 by mwingrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	size_t	t_dst;
-	size_t	t_src;
+	t_list	*sorting;
 
-	t_dst = ft_strlen(dst);
-	t_src = ft_strlen((char *)src);
-	if (!(size > t_dst))
-		return (size + t_src);
-	ft_strncat(dst, src, size - t_dst - 1);
-	return (t_dst + t_src);
+	if (lst)
+	{
+		sorting = f(lst);
+		sorting->next = ft_lstmap(lst->next, f);
+		return (sorting);
+	}
+	return (NULL);
 }
